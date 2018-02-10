@@ -1,12 +1,15 @@
 package com.bacc.gameworld;
 
 import com.bacc.gameobjects.Ground;
+import com.bacc.gameobjects.Obstacle;
 import com.bacc.gameobjects.Runner;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
 import com.badlogic.gdx.graphics.OrthographicCamera;
 import com.badlogic.gdx.graphics.g2d.SpriteBatch;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
+
+import java.util.ArrayList;
 
 /**
  * Created by danestrin on 2018-02-09.
@@ -24,6 +27,7 @@ public class GameRenderer {
 
     private Runner runner;
     private Ground ground;
+    private ArrayList<Obstacle> obstacles;
 
     public GameRenderer(GameWorld world) {
 
@@ -33,6 +37,7 @@ public class GameRenderer {
 
         this.runner = world.getRunner();
         this.ground = world.getGround();
+        this.obstacles = world.getObstacles();
 
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 320, 160);
@@ -54,6 +59,11 @@ public class GameRenderer {
         // Draw Runner
         shapeRenderer.setColor(212 / 255.0f, 123 / 255.0f, 35 / 255.0f, 1);
         shapeRenderer.rect(runner.getX(), runner.getY(), runner.getWidth(), runner.getHeight());
+        for(Obstacle o : obstacles){
+            // Draw Enemy
+            shapeRenderer.setColor(100 / 255.0f, 123 / 255.0f, 35 / 255.0f, 1);
+            shapeRenderer.rect(o.getX(), o.getY(), o.getWidth(), o.getHeight());
+        }
 
         shapeRenderer.end();
     }
