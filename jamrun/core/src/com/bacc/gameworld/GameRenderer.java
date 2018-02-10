@@ -57,8 +57,6 @@ public class GameRenderer {
 
         //shapeRenderer.polygon(runner.getBoundingPoly().getTransformedVertices());
 
-        shapeRenderer.end();
-
         // Begin SpriteBatch
 
         currentFrame = AssetLoader.runAnim.getKeyFrame(runTime);
@@ -67,31 +65,33 @@ public class GameRenderer {
 
         batch.draw(AssetLoader.bg, 0, 0, 320, 160);
         batch.draw(AssetLoader.ground, ground.getX(), ground.getY(), ground.getWidth(), ground.getHeight());
-        batch.draw(currentFrame, runner.getX(), runner.getY());
 
-        AssetLoader.font.getData().setScale(0.5f);
-        AssetLoader.font.setColor(255, 255, 255, 255);
-        AssetLoader.font.draw(batch, "CALORIES BURNED: " + world.getScore(), 0, 0, width, Align.left, true);
+        if (world.isTitle()) {
+            AssetLoader.font.getData().setScale(1f);
+            AssetLoader.font.setColor(255, 255, 255, 255);
+            AssetLoader.font.draw(batch, "FAT BOY SZN \n PRESS SPACEBAR TO START", 0, height/2, width, Align.center, true);
+        } else if (world.isInGame()) {
+            batch.draw(currentFrame, runner.getX(), runner.getY());
 
-        for (Obstacle o : obstacleManager.getCollectables()){
-            //batch.draw(AssetLoader.apple, o.getX(), o.getY(), o.getWidth(), o.getHeight());
-            batch.draw(AssetLoader.apple, o.getX(), o.getY(), o.getWidth(), o.getHeight());
+            AssetLoader.font.getData().setScale(0.5f);
+            AssetLoader.font.setColor(255, 255, 255, 255);
+            AssetLoader.font.draw(batch, "CALORIES BURNED: " + world.getScore(), 0, 0, width, Align.left, true);
+
+            for (Obstacle o : obstacleManager.getCollectables()) {
+                //batch.draw(AssetLoader.apple, o.getX(), o.getY(), o.getWidth(), o.getHeight());
+                batch.draw(AssetLoader.apple, o.getX(), o.getY(), o.getWidth(), o.getHeight());
+            }
+
+            for (Obstacle o : obstacleManager.getEnemies()) {
+                // Draw Enemy
+                batch.draw(AssetLoader.crate, o.getX(), o.getY(), o.getWidth(), o.getHeight());
+                // shapeRenderer.polygon(o.getBoundingPoly().getTransformedVertices());
+            }
+        } else if (world.isGameOver()) {
+            AssetLoader.font.getData().setScale(1f);
+            AssetLoader.font.setColor(255, 255, 255, 255);
+            AssetLoader.font.draw(batch, "GAME OVER \n YOU BURNED " + world.getScore() + " CALORIES", 0, height/2, width, Align.center, true);
         }
-
         batch.end();
-
-        // Begin ShapeRenderer
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        // Debugging for Collisions
-
-        for (Obstacle o : obstacleManager.getEnemies()){
-            // Draw Enemy
-            shapeRenderer.setColor(0 / 255.0f, 0 / 255.0f, 0 / 255.0f, 1);
-            shapeRenderer.rect(o.getX(), o.getY(), o.getWidth(), o.getHeight());
-            // shapeRenderer.polygon(o.getBoundingPoly().getTransformedVertices());
-        }
-
-        shapeRenderer.end();
     }
 }

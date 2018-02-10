@@ -1,6 +1,5 @@
 package com.bacc.gameobjects;
 
-import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 
@@ -26,7 +25,6 @@ public class Obstacle {
 
     public boolean collides(Runner runner) {
         if (Intersector.overlapConvexPolygons(this.boundingPoly, runner.getBoundingPoly())) {
-            Gdx.app.log("Collision","player hit obstacle");
             return true;
         }
         else {
@@ -84,16 +82,16 @@ public class Obstacle {
         updatePoly(delta);
     }
 
-    private void resetPos(float width, float difference) {
+    public void resetPos(float width, float difference) {
         Random rand = new Random();
-        float offset = (float)(Math.random() * width*2+100) / difference;
-        this.x = width+offset;
+        float offset = (rand.nextInt((int) 3) * 100) / difference;
+        this.x = width + offset;
     }
 
     public void resetCPos(float width, float difference) {
         Random rand = new Random();
-        float offset = (float)(Math.random() * width*2+100) / difference;
-        this.x = width+offset;
+        float offset = (rand.nextInt((int) 5) * 150) / difference;
+        this.x = width + offset;
     }
 
     private void movement() {

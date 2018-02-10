@@ -5,7 +5,6 @@ import com.bacc.gameobjects.Ground;
 import com.bacc.gameobjects.Obstacle;
 import com.bacc.gameobjects.Runner;
 import com.bacc.helpers.AssetLoader;
-import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
 
@@ -32,10 +31,16 @@ public class GameWorld {
     private int enemies;
     private int collectibles;
     private float difference;
+    private int collectible_value;
 
+    private GameState currentState = GameState.TITLE;
 
     // World Parameters - these will change every time you play
     private float gravity;
+
+    public enum GameState {
+        TITLE, INGAME, GAMEOVER
+    }
 
     public GameWorld(float width, float height) {
         this.width = width;
@@ -45,8 +50,9 @@ public class GameWorld {
         this.gravity = gameParameters.getGravity();
 
         // Game Objects
-        this.runner = new Runner(50, 0, AssetLoader.dude1.getRegionWidth(), AssetLoader.dude1.getRegionHeight(), gravity);
+
         this.ground = new Ground(0, height-32, 320, 32);
+        this.runner = new Runner(50, ground.getY() - AssetLoader.dude1.getRegionHeight(), AssetLoader.dude1.getRegionWidth(), AssetLoader.dude1.getRegionHeight(), gravity);
 
         this.runner.setJump(gameParameters.getJump_factor());
         this.spriteVelocity = gameParameters.getSpriteVelocity();
@@ -54,9 +60,30 @@ public class GameWorld {
         this.collectibles = gameParameters.getCollectibles();
         this.difference = gameParameters.getDifference();
         this.obstacleManager = new ObstacleManager(enemies,collectibles,spriteVelocity, this);
+        this.collectible_value = gameParameters.getCollectible_value();
     }
 
     public void update(float delta) {
+        switch(currentState) {
+            case TITLE:
+            default:
+                updateTitle(delta);
+                break;
+
+            case INGAME:
+                updateInGame(delta);
+                break;
+            case GAMEOVER:
+                updateGameOver(delta);
+                break;
+        }
+    }
+
+    public void updateTitle(float delta) {
+
+    }
+
+    public void updateInGame(float delta) {
         runner.update(delta);
 
         obstacleManager.update(delta,width,difference);
@@ -66,6 +93,42 @@ public class GameWorld {
 
         // Collisions
         checkCollisions();
+    }
+
+    public void restart() {
+        this.score = 0;
+        currentState = GameState.TITLE;
+
+        runner.setX(50);
+        runner.setY(ground.getY() - runner.getHeight());
+
+        for (Obstacle o : obstacleManager.getEnemies()) {
+            o.resetPos(this.width, this.difference);
+        }
+
+        for (Obstacle o : obstacleManager.getCollectables()) {
+            o.resetCPos(this.width, this.difference);
+        }
+    }
+
+    public void updateGameOver(float delta) {
+
+    }
+
+    public boolean isTitle() {
+        return currentState == GameState.TITLE;
+    }
+
+    public boolean isGameOver() {
+        return currentState == GameState.GAMEOVER;
+    }
+
+    public boolean isInGame() {
+        return currentState == GameState.INGAME;
+    }
+
+    public void start() {
+        currentState = GameState.INGAME;
     }
 
     public void inc_score(float delta) {
@@ -84,17 +147,15 @@ public class GameWorld {
 
         for(Obstacle o : obstacleManager.getEnemies()){
             if (o.collides(runner)) {
-                //end game
-                Gdx.app.log("Collision","player hit obstacle");
+                currentState = GameState.GAMEOVER;
 
             }
         }
 
         for(Obstacle o : obstacleManager.getCollectables()){
             if (o.collides(runner)) {
-                this.score += 5;
+                this.score += collectible_value;
                 o.resetCPos(this.width, this.difference);
-                Gdx.app.log("Collision","apple collected");
             }
         }
     }

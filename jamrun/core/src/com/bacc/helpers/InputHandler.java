@@ -1,6 +1,8 @@
 package com.bacc.helpers;
 
 import com.bacc.gameworld.GameWorld;
+import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.Input;
 import com.badlogic.gdx.InputProcessor;
 
 /**
@@ -18,16 +20,20 @@ public class InputHandler implements InputProcessor {
 
     @Override
     public boolean touchDown(int screenX, int screenY, int pointer, int button) {
-        if (world.getGround().collides(world.getRunner())) {
-            world.getRunner().onPress();
-            return true;
-        }
-
         return false;
     }
 
     @Override
     public boolean keyDown(int keycode) {
+        if (world.getGround().collides(world.getRunner()) && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && world.isInGame()) {
+            world.getRunner().onPress();
+            return true;
+        } else if (world.isTitle()) {
+            world.start();
+        } else {
+            world.restart();
+        }
+
         return false;
     }
 

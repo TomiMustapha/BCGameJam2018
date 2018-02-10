@@ -19,7 +19,7 @@ public class AssetLoader {
     public static Animation<TextureRegion>runAnim;
     public static TextureRegion dude1, dude2, dude3;
 
-    public static TextureRegion bg, ground, apple;
+    public static TextureRegion bg, ground, apple, crate;
 
     public static BitmapFont font;
 
@@ -41,6 +41,8 @@ public class AssetLoader {
 
         apple = new TextureRegion(texture, 54, 0, 12, 12);
         apple.flip(false, true);
+
+        crate = new TextureRegion(texture, 66, 0, 16, 16);
 
         TextureRegion[] dudes = { dude1, dude2, dude3 };
         runAnim = new Animation<TextureRegion>(0.12f, dudes);
