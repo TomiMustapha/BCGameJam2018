@@ -1,5 +1,6 @@
 package com.bacc.gameobjects;
 
+import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 
 /**
@@ -81,6 +82,15 @@ public class Runner {
 
     public void setJump(float jump_factor) {
         this.jump_factor = jump_factor;
+    }
+
+    public boolean collides(Obstacle obstacle){
+        if (Intersector.overlapConvexPolygons(this.boundingPoly, obstacle.getBoundingPoly())) {
+            return true;
+        }
+        else {
+            return false;
+        }
     }
 
     private void jump() {
