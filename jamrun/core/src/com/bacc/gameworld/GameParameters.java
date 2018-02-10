@@ -12,11 +12,11 @@ public class GameParameters {
     private float difference;
 
     public GameParameters(){
-        jump_factor = 9.5f;
+        jump_factor = 9.8f;
         gravity = 100;
-        spriteVelocity = 1.25f;
-        enemies = 3;
-        collectibles = 3;
+        spriteVelocity = 2f;
+        enemies = 4;
+        collectibles = 2;
         difference = 1;
     }
 

@@ -94,7 +94,7 @@ public class Runner {
     }
 
     private void jump() {
-        acceleration -= jump_factor*gravity;
+        acceleration -= jump_factor*gravity + 75;
     }
 
     private void checkBounds() {

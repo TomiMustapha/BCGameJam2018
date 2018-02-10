@@ -12,8 +12,6 @@ import com.badlogic.gdx.graphics.g2d.TextureRegion;
 import com.badlogic.gdx.graphics.glutils.ShapeRenderer;
 import com.badlogic.gdx.utils.Align;
 
-import java.util.ArrayList;
-
 /**
  * Created by danestrin on 2018-02-09.
  */
@@ -74,6 +72,11 @@ public class GameRenderer {
         AssetLoader.font.getData().setScale(0.5f);
         AssetLoader.font.setColor(255, 255, 255, 255);
         AssetLoader.font.draw(batch, "CALORIES BURNED: " + world.getScore(), 0, 0, width, Align.left, true);
+
+        for (Obstacle o : obstacleManager.getCollectables()){
+            //batch.draw(AssetLoader.apple, o.getX(), o.getY(), o.getWidth(), o.getHeight());
+            batch.draw(AssetLoader.apple, o.getX(), o.getY(), o.getWidth(), o.getHeight());
+        }
 
         batch.end();
 

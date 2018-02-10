@@ -39,7 +39,8 @@ public class AssetLoader {
         ground = new TextureRegion(texture, 0, 192, 320, 32);
         ground.flip(false, true);
 
-        apple = new TextureRegion(texture, 36, 0, 12, 12);
+        apple = new TextureRegion(texture, 54, 0, 12, 12);
+        apple.flip(false, true);
 
         TextureRegion[] dudes = { dude1, dude2, dude3 };
         runAnim = new Animation<TextureRegion>(0.12f, dudes);

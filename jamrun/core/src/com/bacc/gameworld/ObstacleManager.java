@@ -1,8 +1,8 @@
 package com.bacc.gameworld;
 
+import com.bacc.gameobjects.Collectible;
 import com.bacc.gameobjects.Enemy;
 import com.bacc.gameobjects.Obstacle;
-import com.bacc.gameobjects.Collectible;
 
 import java.util.ArrayList;
 
@@ -15,6 +15,7 @@ public class ObstacleManager {
     private float spriteVelocity;
     private ArrayList<Obstacle> enemies;
     private ArrayList<Obstacle> collectables;
+    private GameWorld world;
 
     /**
      *
@@ -22,10 +23,11 @@ public class ObstacleManager {
      * @param collectables
      * @param spriteVelocity
      */
-    public ObstacleManager(int enemies, int collectables, float spriteVelocity){
+    public ObstacleManager(int enemies, int collectables, float spriteVelocity, GameWorld world){
         this.spriteVelocity = spriteVelocity;
         this.enemies = new ArrayList<Obstacle>();
         this.collectables = new ArrayList<Obstacle>();
+        this.world = world;
         createEnemies(enemies);
         createCollectables(collectables);
 
@@ -48,7 +50,7 @@ public class ObstacleManager {
      */
     private void createCollectables(int collectables) {
         for (int i = 0; i < collectables; i++) {
-            this.collectables.add(i, new Collectible(320, 160 - 48, 16, 16, spriteVelocity));
+            this.collectables.add(i, new Collectible(320, world.getHeight()/2, 12, 12, spriteVelocity));
         }
 
     }
@@ -66,8 +68,7 @@ public class ObstacleManager {
 
     }
 
-
-
-
     public ArrayList<Obstacle> getEnemies(){return this.enemies;}
+
+    public ArrayList<Obstacle> getCollectables(){return this.collectables;}
 }

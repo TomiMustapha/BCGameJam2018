@@ -90,6 +90,12 @@ public class Obstacle {
         this.x = width+offset;
     }
 
+    public void resetCPos(float width, float difference) {
+        Random rand = new Random();
+        float offset = (float)(Math.random() * width*2+100) / difference;
+        this.x = width+offset;
+    }
+
     private void movement() {
         x = x - velocity;
     }

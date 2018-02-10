@@ -53,7 +53,7 @@ public class GameWorld {
         this.enemies = gameParameters.getEnemies();
         this.collectibles = gameParameters.getCollectibles();
         this.difference = gameParameters.getDifference();
-        this.obstacleManager = new ObstacleManager(enemies,collectibles,spriteVelocity);
+        this.obstacleManager = new ObstacleManager(enemies,collectibles,spriteVelocity, this);
     }
 
     public void update(float delta) {
@@ -87,6 +87,14 @@ public class GameWorld {
                 //end game
                 Gdx.app.log("Collision","player hit obstacle");
 
+            }
+        }
+
+        for(Obstacle o : obstacleManager.getCollectables()){
+            if (o.collides(runner)) {
+                this.score += 5;
+                o.resetCPos(this.width, this.difference);
+                Gdx.app.log("Collision","apple collected");
             }
         }
     }
