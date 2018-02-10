@@ -14,6 +14,8 @@ public class GameScreen implements Screen {
     private GameWorld world;
     private GameRenderer renderer;
 
+    private float runTime;
+
     public GameScreen() {
 
         float screenWidth = Gdx.graphics.getWidth();
@@ -29,8 +31,9 @@ public class GameScreen implements Screen {
 
     @Override
     public void render(float delta) {
+        runTime += delta;
         world.update(delta);
-        renderer.render();
+        renderer.render(runTime);
     }
 
     @Override

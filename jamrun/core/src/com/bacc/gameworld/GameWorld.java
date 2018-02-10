@@ -2,6 +2,7 @@ package com.bacc.gameworld;
 
 import com.bacc.gameobjects.Ground;
 import com.bacc.gameobjects.Runner;
+import com.bacc.helpers.AssetLoader;
 
 /**
  * Created by danestrin on 2018-02-09.
@@ -25,7 +26,7 @@ public class GameWorld {
         this.gravity = 40;
 
         // Game Objects
-        this.runner = new Runner(50, 0, 16, 16, gravity);
+        this.runner = new Runner(50, 0, AssetLoader.dude1.getRegionWidth(), AssetLoader.dude1.getRegionHeight(), gravity);
         this.ground = new Ground(0, height-32, 320, 160);
 
         this.runner.setJump(15);
