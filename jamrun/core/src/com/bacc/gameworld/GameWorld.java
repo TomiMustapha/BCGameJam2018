@@ -39,7 +39,7 @@ public class GameWorld {
 
         // Game Objects
         this.runner = new Runner(50, 0, AssetLoader.dude1.getRegionWidth(), AssetLoader.dude1.getRegionHeight(), gravity);
-        this.ground = new Ground(0, height-32, 320, 160);
+        this.ground = new Ground(0, height-32, 320, 32);
 
         this.runner.setJump(gameParameters.getJump_factor());
         this.spriteVelocity = gameParameters.getSpriteVelocity();

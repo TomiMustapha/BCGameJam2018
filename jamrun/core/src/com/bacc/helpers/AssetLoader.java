@@ -18,9 +18,11 @@ public class AssetLoader {
     public static Animation<TextureRegion>runAnim;
     public static TextureRegion dude1, dude2, dude3;
 
+    public static TextureRegion bg, ground, apple;
+
     public static void load() {
 
-        texture = new Texture(Gdx.files.internal("data/dude.png"));
+        texture = new Texture(Gdx.files.internal("data/texture.png"));
 
         texture.setFilter(Texture.TextureFilter.Nearest, Texture.TextureFilter.Nearest);
         dude1 = new TextureRegion(texture, 0, 0, 18, 32);
@@ -30,9 +32,15 @@ public class AssetLoader {
         dude3 = new TextureRegion(texture, 36, 0, 18, 32);
         dude3.flip(false, true);
 
+        bg = new TextureRegion(texture, 0, 32, 320, 160);
+        ground = new TextureRegion(texture, 0, 192, 320, 32);
+        ground.flip(false, true);
+
+        apple = new TextureRegion(texture, 36, 0, 12, 12);
+
         TextureRegion[] dudes = { dude1, dude2, dude3 };
         runAnim = new Animation<TextureRegion>(0.12f, dudes);
-        runAnim.setPlayMode(Animation.PlayMode.LOOP);
+        runAnim.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
     }
 
     public static void dispose() {

@@ -9,9 +9,9 @@ public class GameParameters {
     private float spriteVelocity;
 
     public GameParameters(){
-        jump_factor = 10;
+        jump_factor = 9.5f;
         gravity = 100;
-        spriteVelocity = 1;
+        spriteVelocity = 1.25f;
     }
 
     public float getGravity() {

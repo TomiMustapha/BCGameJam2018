@@ -56,27 +56,6 @@ public class GameRenderer {
         Gdx.gl.glClearColor(145 / 255.0f, 187 / 255.0f, 255 / 255.0f, 1);
         Gdx.gl.glClear(GL20.GL_COLOR_BUFFER_BIT);
 
-        // Begin ShapeRenderer
-        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
-
-        // Draw Ground
-        shapeRenderer.setColor(111 / 255.0f, 186 / 255.0f, 45 / 255.0f, 1);
-        shapeRenderer.rect(ground.getX(), ground.getY(), ground.getWidth(), ground.getHeight());
-
-        // Draw Runner
-
-        //shapeRenderer.setColor(212 / 255.0f, 123 / 255.0f, 35 / 255.0f, 1);
-        //shapeRenderer.rect(runner.getX(), runner.getY(), runner.getWidth(), runner.getHeight());
-
-        // Debugging for Collisions
-
-        for (Obstacle o : obstacles){
-            // Draw Enemy
-            shapeRenderer.setColor(0 / 255.0f, 0 / 255.0f, 0 / 255.0f, 1);
-            shapeRenderer.rect(o.getX(), o.getY(), o.getWidth(), o.getHeight());
-            // shapeRenderer.polygon(o.getBoundingPoly().getTransformedVertices());
-        }
-
         //shapeRenderer.polygon(runner.getBoundingPoly().getTransformedVertices());
 
         shapeRenderer.end();
@@ -87,8 +66,24 @@ public class GameRenderer {
 
         batch.begin();
 
+        batch.draw(AssetLoader.bg, 0, 0, 320, 160);
+        batch.draw(AssetLoader.ground, ground.getX(), ground.getY(), ground.getWidth(), ground.getHeight());
         batch.draw(currentFrame, runner.getX(), runner.getY());
 
         batch.end();
+
+        // Begin ShapeRenderer
+        shapeRenderer.begin(ShapeRenderer.ShapeType.Filled);
+
+        // Debugging for Collisions
+
+        for (Obstacle o : obstacles){
+            // Draw Enemy
+            shapeRenderer.setColor(0 / 255.0f, 0 / 255.0f, 0 / 255.0f, 1);
+            shapeRenderer.rect(o.getX(), o.getY(), o.getWidth(), o.getHeight());
+            // shapeRenderer.polygon(o.getBoundingPoly().getTransformedVertices());
+        }
+
+        shapeRenderer.end();
     }
 }
