@@ -2,6 +2,7 @@ package com.bacc.screens;
 
 import com.bacc.gameworld.GameRenderer;
 import com.bacc.gameworld.GameWorld;
+import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
 /**
@@ -14,7 +15,12 @@ public class GameScreen implements Screen {
 
     public GameScreen() {
 
-        world = new GameWorld();
+        float screenWidth = Gdx.graphics.getWidth();
+        float screenHeight = Gdx.graphics.getHeight();
+        float gameWidth = 320;
+        float gameHeight = screenHeight / (screenWidth / gameWidth);
+
+        world = new GameWorld(gameWidth, gameHeight);
         renderer = new GameRenderer(world);
     }
 
