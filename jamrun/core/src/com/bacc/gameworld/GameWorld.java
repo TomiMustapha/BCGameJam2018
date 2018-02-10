@@ -20,10 +20,11 @@ public class GameWorld {
 
     private Runner runner;
     private Ground ground;
+    private GameParameters gameParameters;
     private ArrayList<Obstacle> obstacles;
     private Enemy enemy;
     private Enemy enemy2;
-    private float spriteVelocity = 1;
+    private float spriteVelocity;
 
 
     // World Parameters - these will change every time you play
@@ -32,15 +33,16 @@ public class GameWorld {
     public GameWorld(float width, float height) {
         this.width = width;
         this.height = height;
-
+        this.gameParameters = new GameParameters();
         // Parameters
-        this.gravity = 100;
+        this.gravity = gameParameters.getGravity();
 
         // Game Objects
         this.runner = new Runner(50, 0, AssetLoader.dude1.getRegionWidth(), AssetLoader.dude1.getRegionHeight(), gravity);
         this.ground = new Ground(0, height-32, 320, 160);
 
-        this.runner.setJump(10);
+        this.runner.setJump(gameParameters.getJump_factor());
+        this.spriteVelocity = gameParameters.getSpriteVelocity();
 
         this.obstacles = new ArrayList<Obstacle>();
 

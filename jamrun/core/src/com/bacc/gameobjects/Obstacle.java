@@ -78,24 +78,23 @@ public class Obstacle {
 
     public void update(float delta, float width){
         movement();
-        isOnScreen();
+        checkBounds(width);
         updatePoly(delta);
     }
 
     private void resetPos(float width) {
-        this.x = width;
+        this.x = width+100;
     }
 
     private void movement() {
         x = x - velocity;
     }
-
-    public boolean isOnScreen() {
-        if(this.x > width || this.x < width){
-            onScreen = false;
+    private void checkBounds(float width){
+        if(this.x < 0-width){
+            resetPos(width);
         } else {
-            onScreen = true;
+
         }
-        return onScreen;
+
     }
 }
