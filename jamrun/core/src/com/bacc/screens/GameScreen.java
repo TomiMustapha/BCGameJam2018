@@ -2,6 +2,7 @@ package com.bacc.screens;
 
 import com.bacc.gameworld.GameRenderer;
 import com.bacc.gameworld.GameWorld;
+import com.bacc.helpers.InputHandler;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.Screen;
 
@@ -22,6 +23,8 @@ public class GameScreen implements Screen {
 
         world = new GameWorld(gameWidth, gameHeight);
         renderer = new GameRenderer(world);
+
+        Gdx.input.setInputProcessor(new InputHandler(world));
     }
 
     @Override

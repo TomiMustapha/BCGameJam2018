@@ -9,6 +9,8 @@ public class Runner {
 
     private float x, y, width, height, gravity;
     private float y_vel = 0;
+    private float acceleration;
+    private float jump_factor;
 
     private Polygon boundingPoly;
 
@@ -22,16 +24,23 @@ public class Runner {
 
         // World Parameters
         this.gravity = gravity;
+
+        this.acceleration = gravity;
     }
 
     public void update(float delta) {
         movement(delta);
         updatePoly(delta);
+        checkBounds();
     }
 
     public void movement(float delta) {
-        y_vel = (y_vel + gravity)*delta;
-        y += y_vel;
+        if (acceleration < gravity) {
+            acceleration += gravity;
+        }
+
+        y_vel = (y_vel + acceleration)*delta;
+        y = y + y_vel;
     }
 
     public void updatePoly(float delta) {
@@ -39,7 +48,7 @@ public class Runner {
     }
 
     public void onPress() {
-
+        jump();
     }
 
     public float getX() {
@@ -68,5 +77,20 @@ public class Runner {
 
     public void setY(float y) {
         this.y = y;
+    }
+
+    public void setJump(float jump_factor) {
+        this.jump_factor = jump_factor;
+    }
+
+    private void jump() {
+        acceleration -= jump_factor*gravity;
+    }
+
+    private void checkBounds() {
+        if (y < 0) {
+            y_vel = 0;
+            acceleration = gravity;
+        }
     }
 }

@@ -2,7 +2,6 @@ package com.bacc.gameworld;
 
 import com.bacc.gameobjects.Ground;
 import com.bacc.gameobjects.Runner;
-import com.badlogic.gdx.Gdx;
 
 /**
  * Created by danestrin on 2018-02-09.
@@ -29,7 +28,7 @@ public class GameWorld {
         this.runner = new Runner(50, 0, 16, 16, gravity);
         this.ground = new Ground(0, height-32, 320, 160);
 
-        Gdx.app.log("Collides", String.valueOf(ground.collides(runner)));
+        this.runner.setJump(15);
     }
 
     public void update(float delta) {
