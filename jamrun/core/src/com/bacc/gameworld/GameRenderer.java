@@ -1,5 +1,6 @@
 package com.bacc.gameworld;
 
+import com.bacc.gameobjects.Ground;
 import com.bacc.gameobjects.Runner;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.GL20;
@@ -22,6 +23,7 @@ public class GameRenderer {
     private static float height;
 
     private Runner runner;
+    private Ground ground;
 
     public GameRenderer(GameWorld world) {
 
@@ -30,6 +32,7 @@ public class GameRenderer {
         this.height = world.getHeight();
 
         this.runner = world.getRunner();
+        this.ground = world.getGround();
 
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 320, 160);
@@ -46,10 +49,10 @@ public class GameRenderer {
 
         // Draw Ground
         shapeRenderer.setColor(111 / 255.0f, 186 / 255.0f, 45 / 255.0f, 1);
-        shapeRenderer.rect(0, this.height - 32, 320, 32);
+        shapeRenderer.rect(ground.getX(), ground.getY(), ground.getWidth(), ground.getHeight());
 
         // Draw Runner
-        shapeRenderer.setColor(111 / 255.0f, 186 / 255.0f, 45 / 255.0f, 1);
+        shapeRenderer.setColor(212 / 255.0f, 123 / 255.0f, 35 / 255.0f, 1);
         shapeRenderer.rect(runner.getX(), runner.getY(), runner.getWidth(), runner.getHeight());
 
         shapeRenderer.end();
