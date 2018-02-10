@@ -7,6 +7,7 @@ package com.bacc.helpers;
 import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
+import com.badlogic.gdx.graphics.g2d.BitmapFont;
 import com.badlogic.gdx.graphics.g2d.TextureRegion;
 
 ;
@@ -19,6 +20,8 @@ public class AssetLoader {
     public static TextureRegion dude1, dude2, dude3;
 
     public static TextureRegion bg, ground, apple;
+
+    public static BitmapFont font;
 
     public static void load() {
 
@@ -41,6 +44,9 @@ public class AssetLoader {
         TextureRegion[] dudes = { dude1, dude2, dude3 };
         runAnim = new Animation<TextureRegion>(0.12f, dudes);
         runAnim.setPlayMode(Animation.PlayMode.LOOP_PINGPONG);
+
+        font = new BitmapFont(Gdx.files.internal("data/font.fnt"), true);
+        font.setUseIntegerPositions(false);
     }
 
     public static void dispose() {

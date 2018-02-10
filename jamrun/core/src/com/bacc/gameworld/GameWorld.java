@@ -17,6 +17,9 @@ public class GameWorld {
 
     private static float width;
     private static float height;
+    private int score;
+    public float score_rate = 1;
+    public float timer = 0;
 
     private Runner runner;
     private Ground ground;
@@ -54,15 +57,26 @@ public class GameWorld {
 
     public void update(float delta) {
         runner.update(delta);
+
         for(Obstacle o : obstacles){
             o.update(delta, width);
                 //end game
-
-
         }
+
+        // Score
+        inc_score(delta);
 
         // Collisions
         checkCollisions();
+    }
+
+    public void inc_score(float delta) {
+        timer += delta;
+
+        if (timer >= score_rate) {
+            score += 1;
+            timer -= score_rate;
+        }
     }
 
     public void checkCollisions() {
@@ -93,6 +107,10 @@ public class GameWorld {
 
     public Ground getGround() {
         return this.ground;
+    }
+
+    public int getScore() {
+        return this.score;
     }
 
     public ArrayList<Obstacle> getObstacles(){return this.obstacles; }

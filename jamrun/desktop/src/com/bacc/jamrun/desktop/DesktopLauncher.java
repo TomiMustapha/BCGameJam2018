@@ -8,7 +8,7 @@ public class DesktopLauncher {
 	public static void main (String[] arg) {
 		LwjglApplicationConfiguration config = new LwjglApplicationConfiguration();
 		new LwjglApplication(new JamRun(), config);
-		config.title = "BC Game Jam 2018";
+		config.title = "Fat Boy Szn";
 		config.width = 640;
 		config.height = 320;
 	}
