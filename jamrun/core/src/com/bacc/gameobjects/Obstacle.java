@@ -4,6 +4,8 @@ import com.badlogic.gdx.Gdx;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 
+import java.util.Random;
+
 /**
  * Created by Tomi on 2018-02-09.
  */
@@ -76,22 +78,24 @@ public class Obstacle {
         return this.boundingPoly;
     }
 
-    public void update(float delta, float width){
+    public void update(float delta, float width, float difference){
         movement();
-        checkBounds(width);
+        checkBounds(width,difference);
         updatePoly(delta);
     }
 
-    private void resetPos(float width) {
-        this.x = width+100;
+    private void resetPos(float width, float difference) {
+        Random rand = new Random();
+        float offset = (float)(Math.random() * width*2+100) / difference;
+        this.x = width+offset;
     }
 
     private void movement() {
         x = x - velocity;
     }
-    private void checkBounds(float width){
+    private void checkBounds(float width, float difference){
         if(this.x < 0-width){
-            resetPos(width);
+            resetPos(width, difference);
         } else {
 
         }

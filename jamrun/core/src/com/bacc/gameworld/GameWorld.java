@@ -28,6 +28,10 @@ public class GameWorld {
     private Enemy enemy;
     private Enemy enemy2;
     private float spriteVelocity;
+    private ObstacleManager obstacleManager;
+    private int enemies;
+    private int collectibles;
+    private float difference;
 
 
     // World Parameters - these will change every time you play
@@ -46,22 +50,16 @@ public class GameWorld {
 
         this.runner.setJump(gameParameters.getJump_factor());
         this.spriteVelocity = gameParameters.getSpriteVelocity();
-
-        this.obstacles = new ArrayList<Obstacle>();
-
-        this.enemy = new Enemy(width, height - 48, 16, 16, spriteVelocity );
-        this.enemy2 = new Enemy(width+100, height - 48, 16, 16, spriteVelocity );
-        obstacles.add(enemy);
-        obstacles.add(enemy2);
+        this.enemies = gameParameters.getEnemies();
+        this.collectibles = gameParameters.getCollectibles();
+        this.difference = gameParameters.getDifference();
+        this.obstacleManager = new ObstacleManager(enemies,collectibles,spriteVelocity);
     }
 
     public void update(float delta) {
         runner.update(delta);
 
-        for(Obstacle o : obstacles){
-            o.update(delta, width);
-                //end game
-        }
+        obstacleManager.update(delta,width,difference);
 
         // Score
         inc_score(delta);
@@ -84,7 +82,7 @@ public class GameWorld {
             runner.setY(ground.getY() - runner.getHeight());
         }
 
-        for(Obstacle o : obstacles){
+        for(Obstacle o : obstacleManager.getEnemies()){
             if (o.collides(runner)) {
                 //end game
                 Gdx.app.log("Collision","player hit obstacle");
@@ -113,5 +111,5 @@ public class GameWorld {
         return this.score;
     }
 
-    public ArrayList<Obstacle> getObstacles(){return this.obstacles; }
+    public ObstacleManager getObstaclesManager(){return this.obstacleManager; }
 }

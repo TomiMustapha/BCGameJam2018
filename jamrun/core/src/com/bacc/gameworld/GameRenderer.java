@@ -32,7 +32,7 @@ public class GameRenderer {
 
     private Runner runner;
     private Ground ground;
-    private ArrayList<Obstacle> obstacles;
+    private ObstacleManager obstacleManager;
 
     public GameRenderer(GameWorld world) {
 
@@ -42,7 +42,7 @@ public class GameRenderer {
 
         this.runner = world.getRunner();
         this.ground = world.getGround();
-        this.obstacles = world.getObstacles();
+        this.obstacleManager = world.getObstaclesManager();
 
         cam = new OrthographicCamera();
         cam.setToOrtho(true, 320, 160);
@@ -82,7 +82,7 @@ public class GameRenderer {
 
         // Debugging for Collisions
 
-        for (Obstacle o : obstacles){
+        for (Obstacle o : obstacleManager.getEnemies()){
             // Draw Enemy
             shapeRenderer.setColor(0 / 255.0f, 0 / 255.0f, 0 / 255.0f, 1);
             shapeRenderer.rect(o.getX(), o.getY(), o.getWidth(), o.getHeight());

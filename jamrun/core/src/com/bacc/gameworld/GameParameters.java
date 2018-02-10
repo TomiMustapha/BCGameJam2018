@@ -7,11 +7,17 @@ public class GameParameters {
     private float jump_factor;
     private float gravity;
     private float spriteVelocity;
+    private int enemies;
+    private int collectibles;
+    private float difference;
 
     public GameParameters(){
         jump_factor = 9.5f;
         gravity = 100;
         spriteVelocity = 1.25f;
+        enemies = 3;
+        collectibles = 3;
+        difference = 1;
     }
 
     public float getGravity() {
@@ -24,5 +30,17 @@ public class GameParameters {
 
     public float getSpriteVelocity() {
         return spriteVelocity;
+    }
+
+    public int getEnemies() {
+        return enemies;
+    }
+
+    public int getCollectibles() {
+        return collectibles;
+    }
+
+    public float getDifference() {
+        return difference;
     }
 }
