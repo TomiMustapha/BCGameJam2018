@@ -4,9 +4,7 @@ import com.bacc.gameobjects.Enemy;
 import com.bacc.gameobjects.Ground;
 import com.bacc.gameobjects.Obstacle;
 import com.bacc.gameobjects.Runner;
-
 import com.bacc.helpers.AssetLoader;
-
 import com.badlogic.gdx.Gdx;
 
 import java.util.ArrayList;
@@ -36,14 +34,16 @@ public class GameWorld {
         this.height = height;
 
         // Parameters
-        this.gravity = 40;
+        this.gravity = 100;
 
         // Game Objects
         this.runner = new Runner(50, 0, AssetLoader.dude1.getRegionWidth(), AssetLoader.dude1.getRegionHeight(), gravity);
         this.ground = new Ground(0, height-32, 320, 160);
 
-        this.runner.setJump(15);
-        this.obstacles = new ArrayList<Obstacle>(1);
+        this.runner.setJump(10);
+
+        this.obstacles = new ArrayList<Obstacle>();
+
         this.enemy = new Enemy(width, height - 48, 16, 16, spriteVelocity );
         this.enemy2 = new Enemy(width+100, height - 48, 16, 16, spriteVelocity );
         obstacles.add(enemy);
@@ -53,7 +53,7 @@ public class GameWorld {
     public void update(float delta) {
         runner.update(delta);
         for(Obstacle o : obstacles){
-            o.update(delta);
+            o.update(delta, width);
                 //end game
 
 
@@ -69,7 +69,7 @@ public class GameWorld {
         }
 
         for(Obstacle o : obstacles){
-            if (runner.collides(o)) {
+            if (o.collides(runner)) {
                 //end game
                 Gdx.app.log("Collision","player hit obstacle");
 
