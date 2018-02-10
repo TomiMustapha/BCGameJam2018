@@ -28,9 +28,9 @@ public class InputHandler implements InputProcessor {
         if (world.getGround().collides(world.getRunner()) && Gdx.input.isKeyJustPressed(Input.Keys.SPACE) && world.isInGame()) {
             world.getRunner().onPress();
             return true;
-        } else if (world.isTitle()) {
+        } else if (world.isTitle() && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)) {
             world.start();
-        } else {
+        } else if (world.isGameOver() && Gdx.input.isKeyJustPressed(Input.Keys.SPACE)){
             world.restart();
         }
 
