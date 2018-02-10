@@ -5,6 +5,7 @@ package com.bacc.helpers;
  */
 
 import com.badlogic.gdx.Gdx;
+import com.badlogic.gdx.audio.Sound;
 import com.badlogic.gdx.graphics.Texture;
 import com.badlogic.gdx.graphics.g2d.Animation;
 import com.badlogic.gdx.graphics.g2d.BitmapFont;
@@ -22,6 +23,10 @@ public class AssetLoader {
     public static TextureRegion bg, ground, apple, crate;
 
     public static BitmapFont font;
+
+    public static Sound jump;
+    public static Sound pickup;
+    public static Sound gameOver;
 
     public static void load() {
 
@@ -50,6 +55,10 @@ public class AssetLoader {
 
         font = new BitmapFont(Gdx.files.internal("data/font.fnt"), true);
         font.setUseIntegerPositions(false);
+
+        jump = Gdx.audio.newSound(Gdx.files.internal("data/jump.wav"));
+        pickup = Gdx.audio.newSound(Gdx.files.internal("data/pickup.wav"));
+        gameOver = Gdx.audio.newSound(Gdx.files.internal("data/Explosion.wav"));
     }
 
     public static void dispose() {

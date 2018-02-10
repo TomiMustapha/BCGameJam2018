@@ -148,6 +148,7 @@ public class GameWorld {
         for(Obstacle o : obstacleManager.getEnemies()){
             if (o.collides(runner)) {
                 currentState = GameState.GAMEOVER;
+                AssetLoader.gameOver.play();
 
             }
         }
@@ -156,6 +157,7 @@ public class GameWorld {
             if (o.collides(runner)) {
                 this.score += collectible_value;
                 o.resetCPos(this.width, this.difference);
+                AssetLoader.pickup.play();
             }
         }
     }

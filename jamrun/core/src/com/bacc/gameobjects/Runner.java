@@ -1,5 +1,6 @@
 package com.bacc.gameobjects;
 
+import com.bacc.helpers.AssetLoader;
 import com.badlogic.gdx.math.Intersector;
 import com.badlogic.gdx.math.Polygon;
 
@@ -95,6 +96,7 @@ public class Runner {
 
     private void jump() {
         acceleration -= jump_factor*gravity + 50;
+        AssetLoader.jump.play();
     }
 
     private void checkBounds() {
