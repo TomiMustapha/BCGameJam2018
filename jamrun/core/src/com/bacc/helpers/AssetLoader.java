@@ -56,8 +56,8 @@ public class AssetLoader {
         font = new BitmapFont(Gdx.files.internal("data/font.fnt"), true);
         font.setUseIntegerPositions(false);
 
-        jump = Gdx.audio.newSound(Gdx.files.internal("data/jump.wav"));
-        pickup = Gdx.audio.newSound(Gdx.files.internal("data/pickup.wav"));
+        jump = Gdx.audio.newSound(Gdx.files.internal("data/Jump.wav"));
+        pickup = Gdx.audio.newSound(Gdx.files.internal("data/Pickup.wav"));
         gameOver = Gdx.audio.newSound(Gdx.files.internal("data/Explosion.wav"));
     }
 
