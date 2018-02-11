@@ -69,7 +69,11 @@ public class GameRenderer {
         if (world.isTitle()) {
             AssetLoader.font.getData().setScale(1f);
             AssetLoader.font.setColor(255, 255, 255, 255);
-            AssetLoader.font.draw(batch, "FAT BOY SZN \n PRESS SPACEBAR TO START", 0, height/2, width, Align.center, true);
+            AssetLoader.font.draw(batch, "FAT BOY SZN \n PRESS SPACEBAR TO START", 0, height/3, width, Align.center, true);
+
+            AssetLoader.font.getData().setScale(0.5f);
+            AssetLoader.font.setColor(255, 255, 255, 255);
+            AssetLoader.font.draw(batch, "Created by Dan Estrin and Tomi Mustapha", 0, height - 8, width, Align.right, true);
         } else if (world.isInGame()) {
             batch.draw(currentFrame, runner.getX(), runner.getY());
 
